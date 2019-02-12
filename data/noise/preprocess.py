@@ -148,7 +148,7 @@ def noise_typo(text):
     return out
 
 #load document
-in_filename = 'image_coco.txt'
+in_filename = 'data.txt'
 # in_filename = 'image_coco.txt.bak'
 doc = load_doc(in_filename)
 doc = np.asarray(doc)
