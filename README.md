@@ -21,7 +21,7 @@ bash run.sh <argument>
 ## File location
 
 the generated file will be in `./save/test_file.txt`
-the log will be in ./experiment.csv
+the log will be in `./experiment.csv`
 ## Reference
 ### This project is based on https://github.com/geek-ai/Texygen
 
