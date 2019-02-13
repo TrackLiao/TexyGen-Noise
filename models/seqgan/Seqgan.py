@@ -279,7 +279,7 @@ class Seqgan(Gan):
 
         #assign fake size to real might need to modified
         self.sequence_length = self.sequence_length_fake
-        self.num_vocab_size = self.vocab_size_fake
+        self.vocab_size = self.vocab_size_fake
 
 
 
@@ -315,8 +315,11 @@ class Seqgan(Gan):
             outfile.write(text_to_code(tokens_fake, word_index_dict_fake, self.sequence_length_fake))
 
         #oracle_file is the encoded real text
+        #use fake file tokens
         with open(self.oracle_file, 'w') as outfile:
-            outfile.write(text_to_code(tokens, word_index_dict, self.sequence_length))
+            # outfile.write(text_to_code(tokens, word_index_dict, self.sequence_length))
+            outfile.write(text_to_code(tokens_fake, word_index_dict_fake, self.sequence_length_fake))
+
         return word_index_dict, index_word_dict, word_index_dict_fake, index_word_dict_fake
 
     def init_real_metric(self):

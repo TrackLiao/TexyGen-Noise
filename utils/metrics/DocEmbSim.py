@@ -148,9 +148,11 @@ class DocEmbSim(Metrics):
 
     def get_oracle_sim(self):
         self.oracle_sim = self.get_wordvec(self.oracle_file)
+        print("self.oracle_sim : ", len(self.oracle_sim))
 
     def get_gen_sim(self):
         self.gen_sim = self.get_wordvec(self.generator_file)
+        print("self.gen_sim : ", len(self.oracle_sim))
 
     def get_dis_corr(self):
         if len(self.oracle_sim) != len(self.gen_sim):
