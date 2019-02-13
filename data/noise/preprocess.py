@@ -86,15 +86,17 @@ def noise_tense(text):
         t = TextBlob(' '.join(text[i]))
         for word, pos in t.tags:
             if pos == 'NN':
-                if word == word.lemmatize():
-                    word = word.pluralize()
-                else:
-                    word = word.lemmatize()
+                if randint(0,9) > 6:
+                    if word == word.lemmatize():
+                        word = word.pluralize()
+                    else:
+                        word = word.lemmatize()
             if pos == 'VB':
                 form = list(get_word_forms(word)['v'])
                 if len(form) >= 2 :
                     lc = randint(0, len(form) - 1)
-                    word = form[lc]
+                    if randint(0,9) > 6:
+                        word = form[lc]
 
             r.append(word)
         temp.append(r)
