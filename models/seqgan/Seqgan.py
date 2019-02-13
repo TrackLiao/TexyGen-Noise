@@ -276,6 +276,13 @@ class Seqgan(Gan):
         self.sequence_length, self.vocab_size = text_precess(data_loc)
         #for fake data
         self.sequence_length_fake, self.vocab_size_fake = text_precess_fake(fake_loc)
+
+        #assign fake size to real might need to modified
+        self.sequence_length = self.sequence_length_fake
+        self.num_vocab_size = self.vocab_size_fake
+
+
+
         #set generator
 
         #this line has been modified 
