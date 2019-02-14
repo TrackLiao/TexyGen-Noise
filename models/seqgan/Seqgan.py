@@ -331,8 +331,6 @@ class Seqgan(Gan):
         inll.set_name('nll-test')
         self.add_metric(inll)
 
-        nll = Nll(data_loader=self.oracle_data_loader, rnn=self.generator, sess=self.sess)
-        self.add_metric(nll)
 
         # bleu_2 = Bleu(test_text = self.test_file , real_text = self.real_data , gram = 2 )
         # bleu_2.set_name('BLEU-2')
