@@ -331,6 +331,9 @@ class Seqgan(Gan):
         inll.set_name('nll-test')
         self.add_metric(inll)
 
+        nll = Nll(data_loader=self.oracle_data_loader, rnn=self.oracle, sess=self.sess)
+        self.add_metric(nll)
+
         # bleu_2 = Bleu(test_text = self.test_file , real_text = self.real_data , gram = 2 )
         # bleu_2.set_name('BLEU-2')
         # self.add_metric(bleu_2)
@@ -391,7 +394,7 @@ class Seqgan(Gan):
             end = time()
             print('epoch:' + str(self.epoch) + '\t time:' + str(end - start))
             self.add_epoch()
-            if epoch % 10 == 0 or epoch == self.pre_epoch_num - 1:
+            if epoch % 5 == 0 or epoch == self.pre_epoch_num - 1:
                 generate_samples(self.sess, self.generator, self.batch_size, self.generate_num, self.generator_file)
                 get_real_test_file()
                 self.evaluate()
@@ -420,7 +423,7 @@ class Seqgan(Gan):
             end = time()
             self.add_epoch()
             print('epoch:' + str(self.epoch) + '\t time:' + str(end - start))
-            if epoch % 10 == 0 or epoch == self.adversarial_epoch_num - 1:
+            if epoch % 5 == 0 or epoch == self.adversarial_epoch_num - 1:
             # if epoch == self.adversarial_epoch_num - 1:
                 generate_samples(self.sess, self.generator, self.batch_size, self.generate_num, self.generator_file)
                 get_real_test_file()
