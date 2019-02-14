@@ -155,18 +155,16 @@ in_filename = 'data.txt'
 doc = load_doc(in_filename)
 doc = np.asarray(doc)
 data = parse_array(doc)
+data_bak = data.copy()
 
 
 
+#generate text that have typo
+typo_doc = noise_typo(data)
+save_doc(typo_doc, 'typo.txt')
+print("[1/5] typo.txt generated")
 
 
-#generate swap text
-swap_doc = noise_swap(data)
-# print("random swap neighbour words")
-# print(swap_doc)
-#save_doc
-save_doc(swap_doc, 'swap.txt')
-print("[1/5] swap.txt generated")
 
 
 #generate reverse text
@@ -189,8 +187,11 @@ save_doc(misword_doc, 'misword.txt')
 print("[4/5] misword.txt generated")
 
 
-#generate text that have typo
-typo_doc = noise_typo(data)
-save_doc(typo_doc, 'typo.txt')
-print("[5/5] typo.txt generated")
 
+#generate swap text
+swap_doc = noise_swap(data_bak)
+# print("random swap neighbour words")
+# print(swap_doc)
+#save_doc
+save_doc(swap_doc, 'swap.txt')
+print("[5/5] swap.txt generated")
