@@ -40,6 +40,7 @@ plt.legend()
 
 # plt.show()
 plt.savefig('EmbSim.png')
+plt.close()
 
 #graph for nll-test
 x_swap, y_swap = load_data('seqgan-swap.csv', 2)
@@ -64,3 +65,4 @@ plt.legend()
 
 # plt.show()
 plt.savefig('NLL-test.png')
+plt.close()
