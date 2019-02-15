@@ -1,0 +1,30 @@
+swap
+Bleu-2 : 
+Bleu-3 :
+Bleu-4 :
+Bleu-5 : 
+
+reverse
+Bleu-2 : 
+Bleu-3 :
+Bleu-4 :
+Bleu-5 : 
+
+misword
+Bleu-2 : 
+Bleu-3 :
+Bleu-4 :
+Bleu-5 : 
+
+wtense
+Bleu-2 : 
+Bleu-3 :
+Bleu-4 :
+Bleu-5 : 
+
+typo
+Bleu-2 : 
+Bleu-3 :
+Bleu-4 :
+Bleu-5 : 
+
