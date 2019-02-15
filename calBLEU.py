@@ -52,3 +52,6 @@ print_bleu(test_file, real_file, 'wtense')
 
 test_file = 'save/result/seqgan_typo.txt'
 print_bleu(test_file, real_file, 'typo')
+
+
+print("all done!")
