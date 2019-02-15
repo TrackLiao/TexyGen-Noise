@@ -39,7 +39,7 @@ plt.title("Noise Type")
 plt.legend()
 
 plt.tight_layout()
-plt.show()
+# plt.show()
 plt.savefig('EmbSim.png')
 plt.close()
 
@@ -65,6 +65,6 @@ plt.title("Noise Type")
 plt.legend()
 
 plt.tight_layout()
-plt.show()
+# plt.show()
 plt.savefig('NLL-test.png')
 plt.close()
