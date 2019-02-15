@@ -18,6 +18,9 @@ def load_data(filename, y_type):
 
 
 #graph for EmbSic
+x_real, y_real = load_data('seqgan-real.csv', 1)
+plt.plot(x_real,y_real, linestyle='-', marker='+' ,label='real')
+
 x_swap, y_swap = load_data('seqgan-swap.csv', 1)
 plt.plot(x_swap,y_swap, linestyle='-', marker='o' ,label='swap')
 
@@ -44,6 +47,9 @@ plt.savefig('EmbSim.png')
 plt.close()
 
 #graph for nll-test
+x_real, y_real = load_data('seqgan-real.csv', 2)
+plt.plot(x_real,y_real, linestyle='-', marker='+' ,label='real')
+
 x_swap, y_swap = load_data('seqgan-swap.csv', 2)
 plt.plot(x_swap,y_swap, linestyle='-', marker='o' ,label='swap')
 

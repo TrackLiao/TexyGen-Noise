@@ -71,6 +71,10 @@ references = load_doc('data/noise/data.txt')
 result = []
 
 cand_num = 10
+print("Bleu for real")
+candidate_list = load_doc('save/result/seqgan_real.txt')
+result.append(calscore(candidate_list, references, cand_num, 'real'))
+
 print("Bleu for swap")
 candidate_list = load_doc('save/result/seqgan_swap.txt')
 result.append(calscore(candidate_list, references, cand_num, 'swap'))
