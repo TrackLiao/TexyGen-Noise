@@ -10,11 +10,16 @@
 if [ "$1" = "help" ]; then
     echo "bash run.py <argument>"
     echo "     argument list:"
+    echo "          real"
     echo "          swap"
     echo "          reverse"
     echo "          misword"
     echo "          wtense"
     echo "          typo"
+elif [ "$1" = "real" ]; then
+    echo "testing with real word"
+    python main.py -g seqgan -t real -d ./data/noise/data.txt -f ./data/noise/data.txt
+
 elif [ "$1" = "swap" ]; then
     echo "testing with swap word"
     python main.py -g seqgan -t real -d ./data/noise/data.txt -f ./data/noise/swap.txt
