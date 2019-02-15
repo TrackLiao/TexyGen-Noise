@@ -10,6 +10,7 @@ import math
 import operator
 import json
 from random import randint
+from nltk.translate.bleu_score import SmoothingFunction
 
 def load_doc(filename):
     file = open(filename, 'r')
@@ -90,6 +91,6 @@ print("Bleu for typo")
 candidate_list = load_doc('save/result/seqgan_typo.txt')
 result.append(calscore(candidate_list, references, cand_num, 'typo'))
 
-with open('bleuscore.csv', 'w') as f:
+with open('Bleu_score.csv', 'w') as f:
     for item in result:
         f.write("%s\n" % item)
