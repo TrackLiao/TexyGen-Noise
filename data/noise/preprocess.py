@@ -105,6 +105,50 @@ def noise_tense(text):
         
     return out
 
+# generate noise sentence that change the tense (Noun Only)
+def noise_tense_noun(text):
+    temp = []
+    for i in range(0, text.shape[0]):
+        r = []
+        t = TextBlob(' '.join(text[i]))
+        for word, pos in t.tags:
+            if pos == 'NN':
+                if randint(0,9) > 6:
+                    if word == word.lemmatize():
+                        word = word.pluralize()
+                    else:
+                        word = word.lemmatize()
+
+            r.append(word)
+        temp.append(r)
+    out = np.asarray(temp)
+    # print(out)
+        
+    return out
+
+
+# generate noise sentence that change the tense (Verb Only)
+def noise_tense_verb(text):
+    temp = []
+    for i in range(0, text.shape[0]):
+        r = []
+        t = TextBlob(' '.join(text[i]))
+        for word, pos in t.tags:
+
+            if pos == 'VB':
+                form = list(get_word_forms(word)['v'])
+                if len(form) >= 2 :
+                    lc = randint(0, len(form) - 1)
+                    if randint(0,9) > 6:
+                        word = form[lc]
+
+            r.append(word)
+        temp.append(r)
+    out = np.asarray(temp)
+    # print(out)
+        
+    return out
+
 
 # generate noise sentence that delete some word
 def noise_misword(text):
@@ -180,11 +224,26 @@ print("[3/5] wtense.txt generated")
 
 
 
+# generate wrong tense for noun only
+#generate wrong tense text
+wtense_doc = noise_tense_noun(data)
+save_doc(wtense_doc, 'wtense_noun.txt')
+print("[3.1/5] wtense_noun.txt generated")
+
+# generate wrong tense for verb only
+#generate wrong tense text
+wtense_doc = noise_tense_verb(data)
+save_doc(wtense_doc, 'wtense_verb.txt')
+print("[3.2/5] wtense_verb.txt generated")
+
+
 
 #generate text that remove some element
 misword_doc = noise_misword(data)
 save_doc(misword_doc, 'misword.txt')
 print("[4/5] misword.txt generated")
+
+# generate cross over
 
 
 
@@ -194,4 +253,6 @@ swap_doc = noise_swap(data_bak)
 # print(swap_doc)
 #save_doc
 save_doc(swap_doc, 'swap.txt')
-print("[5/5] swap.txt generated")
+print("[5.1/5] swap.txt generated")
+
+# generate cross over
