@@ -113,7 +113,7 @@ def noise_tense_noun(text):
         t = TextBlob(' '.join(text[i]))
         for word, pos in t.tags:
             if pos == 'NN':
-                if randint(0,9) > 6:
+                if randint(0,9) > 4:
                     if word == word.lemmatize():
                         word = word.pluralize()
                     else:
@@ -137,15 +137,16 @@ def noise_tense_verb(text):
             if pos == 'VB':
                 form = list(get_word_forms(word)['v'])
                 if len(form) >= 2 :
+                    if randint(0,9) > 4:
 
-                    # print("Verb : ", word)
-                    lc = randint(0, len(form) - 1)
-                    wordtemp = form[lc]
-                    while (wordtemp == word) :
+                        # print("Verb : ", word)
                         lc = randint(0, len(form) - 1)
                         wordtemp = form[lc]
-                    word = wordtemp
-                    # print("Change to : ", word)
+                        while (wordtemp == word) :
+                            lc = randint(0, len(form) - 1)
+                            wordtemp = form[lc]
+                        word = wordtemp
+                        # print("Change to : ", word)
 
 
             r.append(word)
