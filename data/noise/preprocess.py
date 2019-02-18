@@ -137,12 +137,15 @@ def noise_tense_verb(text):
             if pos == 'VB':
                 form = list(get_word_forms(word)['v'])
                 if len(form) >= 2 :
+
+                    # print("Verb : ", word)
                     lc = randint(0, len(form) - 1)
                     wordtemp = form[lc]
                     while (wordtemp == word) :
                         lc = randint(0, len(form) - 1)
                         wordtemp = form[lc]
                     word = wordtemp
+                    # print("Change to : ", word)
 
 
             r.append(word)
