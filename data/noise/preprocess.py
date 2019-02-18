@@ -203,58 +203,92 @@ def noise_typo(text):
 # generate cross over text noise
 def noise_cross_over(text):
     temp = []
+    num = 0
     for i in range(0, text.shape[0]-1, 2):
         c_row = [] # current row
         n_row = [] # next row
-
-        c_text = TextBlob(' '.join(text[i])) #current text
-        n_text = TextBlob(' '.join(text[i+1])) #next text
+        c_text = text[i]
+        n_text = text[i+1]
         # initialize head and tail
         c_head = []
         c_tail = [] 
         n_head = [] 
         n_tail = []  
-        c_cut = 0
-        n_cut = 0
-        
-        if randint(0,9) > 2:
-            for word, pos in c_text.tags:
-                if pos != 'CC' and c_cut == 0:
-                    c_head.append(word)
-                elif pos == 'CC':
-                    c_cut = 1
-                if c_cut == 1 :
-                    c_tail.append(word)
-
-            for word, pos in n_text.tags:
-                if pos != 'CC' and n_cut == 0:
-                    n_head.append(word)
-                elif pos == 'CC':
-                    n_cut = 1
-                if n_cut == 1 :
-                    n_tail.append(word)
+        if randint(0, 9) > 2 :
+            # print("crossover")
+            # print("c_text : ", c_text)
+            pec = randint(2, 4) # cut percentage
+            # print("pec : ", pec)
+            c_pos = (len(c_text)-1)//pec
+            # print("c_pos : ", c_pos)
+            n_pos = (len(n_text)-1)//pec
+            # print("n_pos : ", n_pos)
+            c_head = c_text[:c_pos]
+            c_tail = c_text[c_pos:]
+            n_head = n_text[:n_pos]
+            n_tail = n_text[n_pos:]
 
             c_row = [*c_head, *n_tail]
             n_row = [*n_head, *c_tail]
-
-
+            # print("c_row : ", c_row)
+            num += 1
         else:
-            for word, pos in c_text.tags:
-                c_row.append(word)
-
-            for word, pos in n_text.tags:
-                n_row.append(word)
+            c_row = c_text
+            n_row = n_text
 
 
         temp.append(c_row)
         temp.append(n_row)
-        
 
 
     out = np.asarray(temp)
-    # print(out)
-        
+    print("cross over time : ", num)
+
     return out
+
+# # generate cross over text noise
+# def noise_cross_over(text):
+#     temp = []
+#     for i in range(0, text.shape[0]-1, 2):
+#         c_row = [] # current row
+#         n_row = [] # next row
+#         c_text = TextBlob(' '.join(text[i])) #current text
+#         n_text = TextBlob(' '.join(text[i+1])) #next text
+#         # initialize head and tail
+#         c_head = []
+#         c_tail = [] 
+#         n_head = [] 
+#         n_tail = []  
+#         c_cut = 0
+#         n_cut = 0
+#         if randint(0,9) > 2:
+#             for word, pos in c_text.tags:
+#                 if pos != 'CC' and c_cut == 0:
+#                     c_head.append(word)
+#                 elif pos == 'CC':
+#                     c_cut = 1
+#                 if c_cut == 1 :
+#                     c_tail.append(word)
+#             for word, pos in n_text.tags:
+#                 if pos != 'CC' and n_cut == 0:
+#                     n_head.append(word)
+#                 elif pos == 'CC':
+#                     n_cut = 1
+#                 if n_cut == 1 :
+#                     n_tail.append(word)
+#             c_row = [*c_head, *n_tail]
+#             n_row = [*n_head, *c_tail]
+#         else:
+#             for word, pos in c_text.tags:
+#                 c_row.append(word)
+#             for word, pos in n_text.tags:
+#                 n_row.append(word)
+#         temp.append(c_row)
+#         temp.append(n_row)
+#     out = np.asarray(temp)
+#     # print(out)
+#     return out
+
 
 #load document
 in_filename = 'data.txt'
