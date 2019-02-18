@@ -93,7 +93,7 @@ def noise_tense(text):
                         word = word.lemmatize()
             if pos == 'VB':
                 form = list(get_word_forms(word)['v'])
-                if len(form) >= 2 :
+                if len(form) >= 1 :
                     lc = randint(0, len(form) - 1)
                     if randint(0,9) > 6:
                         word = form[lc]
@@ -134,13 +134,16 @@ def noise_tense_verb(text):
         r = []
         t = TextBlob(' '.join(text[i]))
         for word, pos in t.tags:
-
             if pos == 'VB':
                 form = list(get_word_forms(word)['v'])
                 if len(form) >= 2 :
                     lc = randint(0, len(form) - 1)
-                    if randint(0,9) > 6:
-                        word = form[lc]
+                    wordtemp = form[lc]
+                    while (wordtemp == word) :
+                        lc = randint(0, len(form) - 1)
+                        wordtemp = form[lc]
+                    word = wordtemp
+
 
             r.append(word)
         temp.append(r)
@@ -193,6 +196,62 @@ def noise_typo(text):
         
     return out
 
+# generate cross over text noise
+def noise_cross_over(text):
+    temp = []
+    for i in range(0, text.shape[0]-1, 2):
+        c_row = [] # current row
+        n_row = [] # next row
+
+        c_text = TextBlob(' '.join(text[i])) #current text
+        n_text = TextBlob(' '.join(text[i+1])) #next text
+        # initialize head and tail
+        c_head = []
+        c_tail = [] 
+        n_head = [] 
+        n_tail = []  
+        c_cut = 0
+        n_cut = 0
+        
+        if randint(0,9) > 2:
+            for word, pos in c_text.tags:
+                if pos != 'CC' and c_cut == 0:
+                    c_head.append(word)
+                elif pos == 'CC':
+                    c_cut = 1
+                if c_cut == 1 :
+                    c_tail.append(word)
+
+            for word, pos in n_text.tags:
+                if pos != 'CC' and n_cut == 0:
+                    n_head.append(word)
+                elif pos == 'CC':
+                    n_cut = 1
+                if n_cut == 1 :
+                    n_tail.append(word)
+
+            c_row = [*c_head, *n_tail]
+            n_row = [*n_head, *c_tail]
+
+
+        else:
+            for word, pos in c_text.tags:
+                c_row.append(word)
+
+            for word, pos in n_text.tags:
+                n_row.append(word)
+
+
+        temp.append(c_row)
+        temp.append(n_row)
+        
+
+
+    out = np.asarray(temp)
+    # print(out)
+        
+    return out
+
 #load document
 in_filename = 'data.txt'
 # in_filename = 'image_coco.txt.bak'
@@ -226,14 +285,14 @@ print("[3/5] wtense.txt generated")
 
 # generate wrong tense for noun only
 #generate wrong tense text
-wtense_doc = noise_tense_noun(data)
-save_doc(wtense_doc, 'wtense_noun.txt')
+wtense_noun_doc = noise_tense_noun(data)
+save_doc(wtense_noun_doc, 'wtense_noun.txt')
 print("[3.1/5] wtense_noun.txt generated")
 
 # generate wrong tense for verb only
 #generate wrong tense text
-wtense_doc = noise_tense_verb(data)
-save_doc(wtense_doc, 'wtense_verb.txt')
+wtense_verb_doc = noise_tense_verb(data)
+save_doc(wtense_verb_doc, 'wtense_verb.txt')
 print("[3.2/5] wtense_verb.txt generated")
 
 
@@ -244,6 +303,12 @@ save_doc(misword_doc, 'misword.txt')
 print("[4/5] misword.txt generated")
 
 # generate cross over
+cross_over_doc = noise_cross_over(data)
+# print("applying cross over")
+# print(cross_over_doc)
+#save_doc
+save_doc(cross_over_doc, 'cross_over.txt')
+print("[5.1/5] cross_over.txt generated")
 
 
 
@@ -253,6 +318,5 @@ swap_doc = noise_swap(data_bak)
 # print(swap_doc)
 #save_doc
 save_doc(swap_doc, 'swap.txt')
-print("[5.1/5] swap.txt generated")
+print("[5.2/5] swap.txt generated")
 
-# generate cross over
