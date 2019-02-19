@@ -53,19 +53,25 @@ def parse_array(text):
 # generate noise text that swap words
 def noise_swap(text):
     temp = []
+    swap_num = 0
+    
     for i in range(0, text.shape[0]):
-        end = text[i].shape[0] - 1
-        pos = randint(0, end)
-        if pos == end :
-            pos = pos - 1
-        t = text[i][pos]
-        text[i][pos] = text[i][pos+1]
-        text[i][pos+1] = t
+
+        end = text[i].shape[0]-1
+        if end > 5:
+            pos = randint(0, end)
+            if pos == end :
+                pos = pos - 1
+            t = text[i][pos]
+            text[i][pos] = text[i][pos+1]
+            text[i][pos+1] = t
+            swap_num += 1
 
         temp.append(text[i])
     
 
     temp = np.asarray(temp)
+    print("swap_num : ", swap_num)
     return temp
 
 # generate noise sentence that reverse order
@@ -81,6 +87,8 @@ def noise_reverse(text):
 # generate noise sentence that change the tense
 def noise_tense(text):
     temp = []
+    noun_num = 0
+    verb_num = 0
     for i in range(0, text.shape[0]):
         r = []
         t = TextBlob(' '.join(text[i]))
@@ -91,23 +99,28 @@ def noise_tense(text):
                         word = word.pluralize()
                     else:
                         word = word.lemmatize()
+                    noun_num += 1
             if pos == 'VB':
                 form = list(get_word_forms(word)['v'])
                 if len(form) >= 1 :
                     lc = randint(0, len(form) - 1)
                     if randint(0,9) > 6:
                         word = form[lc]
+                    verb_num += 1
 
             r.append(word)
         temp.append(r)
     out = np.asarray(temp)
     # print(out)
+    print("noun_num : ", noun_num)
+    print("verb_num : ", verb_num)
         
     return out
 
 # generate noise sentence that change the tense (Noun Only)
 def noise_tense_noun(text):
     temp = []
+    noun_num = 0
     for i in range(0, text.shape[0]):
         r = []
         t = TextBlob(' '.join(text[i]))
@@ -118,11 +131,13 @@ def noise_tense_noun(text):
                         word = word.pluralize()
                     else:
                         word = word.lemmatize()
+                    noun_num += 1
 
             r.append(word)
         temp.append(r)
     out = np.asarray(temp)
     # print(out)
+    print("noun_num : ", noun_num)
         
     return out
 
@@ -130,6 +145,7 @@ def noise_tense_noun(text):
 # generate noise sentence that change the tense (Verb Only)
 def noise_tense_verb(text):
     temp = []
+    verb_num = 0
     for i in range(0, text.shape[0]):
         r = []
         t = TextBlob(' '.join(text[i]))
@@ -147,11 +163,13 @@ def noise_tense_verb(text):
                             wordtemp = form[lc]
                         word = wordtemp
                         # print("Change to : ", word)
+                        verb_num += 1
 
 
             r.append(word)
         temp.append(r)
     out = np.asarray(temp)
+    print("verb_num : ", verb_num)
     # print(out)
         
     return out
@@ -160,6 +178,7 @@ def noise_tense_verb(text):
 # generate noise sentence that delete some word
 def noise_misword(text):
     temp = []
+    mis_num = 0
     # type of Noun, adjective, Verb, adverb, conjunction
     # candi = ['NN', 'JJ', 'VB', 'RB', 'CC']
     # type of Noun, adjective, Verb, adverb, conjunction
@@ -173,31 +192,36 @@ def noise_misword(text):
             if count <= 1:
                 if pos == candi[c]:
                     count = count + 1
+                    mis_num += 1
                 else:
                     r.append(word)
             else:
                     r.append(word)
         temp.append(r)
     out = np.asarray(temp)
+    print("mis_num : ", mis_num)
         
     return out
 
 # generate noise sentence that contain typo
 def noise_typo(text):
     temp = []
+    typo_num = 0
     for i in range(0, text.shape[0]):
         r = []
         t = TextBlob(' '.join(text[i]))
         for word, pos in t.tags:
-            if randint(0,9) > 6:
+            if randint(0,9) > 8:
                 word = word + random.choice(string.ascii_letters)
                 word = word.lower()
+                typo_num += 1
 
             r.append(word)
         temp.append(r)
     out = np.asarray(temp)
     # print(out)
         
+    print("typo_num : ", typo_num)
     return out
 
 # generate cross over text noise
@@ -298,6 +322,8 @@ doc = np.asarray(doc)
 data = parse_array(doc)
 data_bak = data.copy()
 
+# clean raw data
+save_doc(data, 'data.txt')
 
 
 #generate text that have typo
