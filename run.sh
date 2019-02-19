@@ -15,7 +15,10 @@ if [ "$1" = "help" ]; then
     echo "          reverse"
     echo "          misword"
     echo "          wtense"
+    echo "          noun"
+    echo "          verb"
     echo "          typo"
+    echo "          crossover"
 elif [ "$1" = "real" ]; then
     echo "testing with real word"
     python main.py -g seqgan -t real -d ./data/noise/data.txt -f ./data/noise/data.txt
@@ -40,10 +43,21 @@ elif [ "$1" = "wtense" ]; then
     echo "testing with wrong tense"
     python main.py -g seqgan -t real -d ./data/noise/data.txt -f ./data/noise/wtense.txt
 
+elif [ "$1" = "noun" ]; then
+    echo "testing with wrong tense noun only"
+    python main.py -g seqgan -t real -d ./data/noise/data.txt -f ./data/noise/wtense_noun.txt
+
+elif [ "$1" = "verb" ]; then
+    echo "testing with wrong tense verb only"
+    python main.py -g seqgan -t real -d ./data/noise/data.txt -f ./data/noise/wtense_verb.txt
 
 elif [ "$1" = "typo" ]; then
     echo "testing with typo"
     python main.py -g seqgan -t real -d ./data/noise/data.txt -f ./data/noise/typo.txt
+
+elif [ "$1" = "crossover" ]; then
+    echo "testing with crossover"
+    python main.py -g seqgan -t real -d ./data/noise/data.txt -f ./data/noise/cross_over.txt
 
 else
     echo "use  'bash run.sh help' for more instruction"
