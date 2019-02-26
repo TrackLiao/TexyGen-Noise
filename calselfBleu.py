@@ -14,7 +14,7 @@ def count_score(in_file, noise):
 
 print("Running, please wait")
 result = []
-title = ['gram-2', 'gram-3', 'gram-4', 'noise']
+title = ['gram-2', 'gram-3', 'gram-4', 'gram-5', 'noise']
 result.append(title)
 
 print("Calculating for real data")
