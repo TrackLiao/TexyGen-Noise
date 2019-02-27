@@ -1,0 +1,10 @@
+noise, all, spelling, grammar, punctuation, premium
+real, 147, 123, 18, 6, 27
+swap, 196, 145, 48, 3, 49
+reverse, 151, 95, 53, 3, 37 
+misword, 179, 129, 45, 5, 32 
+wtense, 204, 147, 55, 2, 38 
+noun, 178, 112, 59, 8, 49
+verb, 137, 99, 36, 2, 41
+crossover, 176, 146, 27, 3, 40
+typo, 215, 174, 36, 5, 24
