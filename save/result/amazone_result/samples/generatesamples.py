@@ -25,7 +25,7 @@ def save_doc(text, filename):
 def select_samples(text):
     samples = []
     #select 300 sentence
-    for i in range(300):
+    for i in range(200):
         pos = randint(0, len(text)-1)
         samples.append(text[pos])
     
