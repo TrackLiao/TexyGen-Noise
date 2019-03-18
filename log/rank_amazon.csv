@@ -1,0 +1,10 @@
+Embsim, NLL-test, Grammarly, gram-2, gram-3, gram-4, gram-5
+typo, typo, verb, real, real, real, real
+misword, real, real, noun, noun, noun, noun
+wtense, reverse, reverse, crossover, crossover, wtense, wtense
+verb, noun, crossover, wtense, misword, crossover, reverse
+swap, verb, noun, reverse, wtense, misword, misword
+real, wtense, misword, misword, reverse, reverse, typo
+crossover, swap, swap, verb, typo, typo, crossover
+noun, misword, wtense, typo, verb, verb, verb
+reverse, crossover, typo, swap, swap, swap, swap
