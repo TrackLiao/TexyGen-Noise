@@ -23,6 +23,8 @@ bash run.sh <argument>
 
 the generated file will be in `./save/test_file.txt`
 the log will be in `./experiment.csv`
+the test result for image_coco data set is in `./log/image_coco_log`
+the test result for amazon phone review dataset is in `./log/amazone_log`
 ## Reference
 ### This project is based on https://github.com/geek-ai/Texygen
 
