@@ -6,9 +6,10 @@ Noise influence to SeqGAN
 ## Use your own dataset
 
 put your dataset under `./data/noise/`
+and rename your dataset as `data.txt`
 then run the following code
 ```
-python preprocess.py
+python3 preprocess.py
 ```
 
 ## start training
